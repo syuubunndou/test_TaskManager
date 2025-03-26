@@ -1,0 +1,974 @@
+:root{
+    --main-window-width  : 80%;  
+        /*TaskWindowのmain-window　幅比率を定義　*/
+    --btn-window-width   : calc(97.5% - var(--main-window-width)); 
+        /*TaskWindowのbtn-window　 幅比率を定義*/
+    --task-window-height : 400px; 
+        /*TaskWindowのmain-window　高さ比率を定義*/
+}
+
+/* 【CSSの書く順序】
+    position        : relative;
+    top(bottom)     : 0px
+    right(left)     : 0px;
+    margin          : 0px 0px 0px;
+    padding         : 0px 0px 0px;
+
+    width           : 0px;
+    overflow-x      : scroll;
+    height          : 0px;
+    overflow-y      : scroll;
+
+    background-color: red;
+    border-top      : 5px solid #b1b1b1; 
+    border-left     : 5px solid #b1b1b1; 
+    border-right    : 5px solid #b1b1b1; 
+    border-bottom   : 5px solid #b1b1b1;
+    box-shadow      : 2px 2px 5px rgba(0, 0, 0, 0.2); 
+    border-radius   : 5px; 
+
+    display         : block;    
+*/
+
+html, body {
+    margin          : 0;
+    padding         : 0;
+
+    width           : 100vw;  /* 画面の横幅いっぱい */
+    height          : 100vh; /* 画面の高さいっぱい */
+
+    overflow-x      : hidden; /* スクロールバーを防ぐ */
+    overflow-y      : scroll;
+}
+
+/*=================================================================================*/
+/*====[ヘッダー部分]=============================================================================*/
+
+.header {
+    position        : relative;  /* 相対位置を基準 */
+    margin          : 0px 0px 10px;
+
+    width           : 100%;
+}
+
+.header__logo {
+    width           : 100%; /* 横幅いっぱいに */
+    height          : auto; /* 縦幅は自動調整 */
+    
+    display         : block; /* 余計な隙間をなくす */
+}
+
+.header__labo-logo{
+    position        : absolute;  /* 親要素 .header を基準に配置 */
+    bottom          : 0;  /* 下端に配置 */
+    right           : 300px;  /* 左端に配置 */
+    margin          : 0px 50px 0px;
+    
+    width           : 100px; /* ボタンサイズ（調整可） */
+    height          : auto;
+
+    display         : none;   
+}
+.header__btn {
+    position        : absolute;  /* 親要素 .header を基準に配置 */
+    bottom          : 0;  /* 下端に配置 */
+    right           : 0;  /* 左端に配置 */
+    margin          : 0px 50px 0px;
+
+    width           : 100px; /* ボタンサイズ（調整可） */
+    height          : auto;
+
+    
+}
+
+.header__user-name{
+    position        : absolute;  /* 親要素 .header を基準に配置 */
+    bottom          : 0;  /* 下端に配置 */
+    left            : 30px;
+
+    background-color: rgba(255, 255, 255, 0.678);
+
+    display         : none;
+}
+
+.header__add-btn{
+    position        : absolute;  /* 親要素 .header を基準に配置 */
+    bottom          : 0;  /* 下端に配置 */
+    right           : 120px;  /* 左端に配置 */
+    margin          : 0px 50px 0px;
+    
+    width           : 100px; /* ボタンサイズ（調整可） */
+    height          : auto;
+
+
+} 
+
+.menu{
+    position        : absolute;  /* 親要素 .header を基準に配置 */
+    right           : 52px;  /* 左端に配置 */
+
+    width           : 95px;
+    height          : auto;
+
+    display         : none;
+    z-index         : 99;
+}
+
+.menu__btn{
+    width           : 95px;
+    
+}
+
+.promptLogin{
+    position        : relative;
+    top             : 10%;
+    left            : 10%;
+
+    width           : 80%;
+
+    font-size       : 40px;
+
+    display         : none;
+
+    background-color: snow;
+    border-top      : 5px solid #000000; /* 青色の枠線 */
+    border-left     : 5px solid #000000; /* 青色の枠線 */
+    border-right    : 5px solid #000000; /* 青色の枠線 */
+    border-bottom   : 5px solid #000000;
+    box-shadow      : 2px 2px 5px rgba(0, 0, 0, 0.2); /* 影を追加 */
+    border-radius   : 5px; /* 角を丸くする */  
+}
+.promptLogin__haguruma{
+    position        : relative;
+    top             : 15px;
+    width           : 60px;
+}
+.promptLogin__login-exp{
+    position        : relative;
+    top             : 5px;
+    width           : 120px;   
+}
+
+/*=================================================================================*/
+/*==[index.htmlのタスクウィンドウ部分]===============================================================================*/
+
+
+.task-window{/*index.htmlのタスク表示画面*/
+    position        : relative;
+    margin          : 0px 1px 0px;
+
+    width           : 99%;
+    height          : 410px;
+
+    background-color: snow;
+    border-top      : 5px solid #000000; /* 青色の枠線 */
+    border-left     : 5px solid #000000; /* 青色の枠線 */
+    border-right    : 5px solid #000000; /* 青色の枠線 */
+    border-bottom   : 5px solid #000000;
+    box-shadow      : 2px 2px 5px rgba(0, 0, 0, 0.2); /* 影を追加 */
+    border-radius   : 5px; /* 角を丸くする */
+}
+
+.main-window{
+    position        : relative;
+
+    margin          : 0px 0px 0px;
+    width           : 99%;
+    height          : calc(var(--task-window-height)*1.3);
+
+
+}
+
+.main-value-window{/*task-windowの子block　件名・締め切り・内容を表示する*/
+    position        : absolute;
+
+    background-color: rgb(211, 250, 247);
+    overflow-y      : scroll;
+    overflow-x      : scroll;
+    margin          : 0px 1px 0px;
+    width           : var(--main-window-width);
+    height          : var(--task-window-height);
+
+    border-top      : 5px solid #b1b1b1; /* 青色の枠線 */
+    border-left     : 5px solid #b1b1b1; /* 青色の枠線 */
+    border-right    : 5px solid #b1b1b1; /* 青色の枠線 */
+    border-bottom   : 5px solid #b1b1b1;
+    box-shadow      : 2px 2px 5px rgba(0, 0, 0, 0.2); /* 影を追加 */
+    border-radius   : 5px; /* 角を丸くする */
+    
+}
+.main-value-window--add-task{/*add-task.htmlのタスク表示画面*/
+    position        : relative;
+
+    overflow-x      : scroll;
+    width           : calc(var(--main-window-width));
+    height          : calc(var(--task-window-height)*1.3);
+
+    background-color: rgb(107, 142, 35);
+    border-right    : 5px solid #b1b1b1; /* 青色の枠線 */
+    border-left     : 5px solid #b1b1b1; /* 青色の枠線 */
+
+    white-space     : nowrap; /*改行しない*/
+    
+}
+
+.btn-window{/*task-windowの子block　ボタンをおくウィンドウ。右端*/
+    position        : absolute;
+    right           : 0px;
+    
+    background-color: rgb(90, 90, 19);
+
+    margin          : 0px 1px 0px;
+    width           : var(--btn-window-width);
+    height          : var(--task-window-height);
+
+    border-top      : 5px solid #b1b1b1; /* 青色の枠線 */
+    border-left     : 5px solid #b1b1b1; /* 青色の枠線 */
+    border-right    : 5px solid #b1b1b1; /* 青色の枠線 */
+    border-bottom   : 5px solid #b1b1b1;
+    box-shadow      : 2px 2px 5px rgba(0, 0, 0, 0.2); /* 影を追加 */
+    border-radius   : 5px; /* 角を丸くする */
+}
+.btn-window__pic{/*btn-windowのボタン画像*/
+    position        : relative;
+    top             : calc(var(--task-window-height)/3  );
+    left            : calc(var(--btn-window-width)  /1.5);
+
+    width           : 70%;
+    height          : auto;
+}
+
+.main-value-window__fixed-title-span,
+.main-value-window__editable-title,
+.main-value-window__fixed-deadlline-span,
+.main-value-window__deadline,
+.main-value-window__fixed-content-span,
+.main-value-window__editable-content,
+.task-edit-window__repeat,
+.main-value-window__repeat,
+.main-value-window__combobox,
+.main-value-window__editable-password,
+.main-value-window__fixed-password-span,
+.main-value-window__deadline,
+.main-value-window__title,
+.main-value-window__content,
+.main-value-window__repeat-value{/*task-windowの子block　メインウィンドウの文字サイズを設定*/
+    font-size       : 35px;
+}
+
+.main-value-window__fixed-title-span,
+.main-value-window__editable-title{/*メインウィンドウ：件名elementの位置設定*/
+    position        : relative;
+    top             : 20px;
+    left            : 20px;
+}
+.main-value-window__fixed-title-span{
+    display         : inline-block;
+    top             : 20px;
+}
+.main-value-window__title{
+    position        : relative;
+    left            : 20px;
+    top             : 22px;
+}
+
+.main-value-window__editable-title,
+.main-value-window__editable-password{
+    width           : 530px;
+  
+
+    display         : inline-block;
+    text-align      : left;
+
+    background-color: rgb(255, 255, 255);
+    border-top      : 3px ridge #b1b1b1; /* 青色の枠線 */
+    border-left     : 3px ridge #b1b1b1; /* 青色の枠線 */
+    border-right    : 3px ridge #b1b1b1; /* 青色の枠線 */
+    border-bottom   : 3px ridge #b1b1b1;
+    box-shadow      : 2px 2px 5px rgba(0, 0, 0, 0.2); /* 影を追加 */
+    border-radius   : 5px; /* 角を丸くする */
+}
+
+.main-value-window__fixed-deadlline-span,
+.main-value-window__deadline/*メインウィンドウ：締め切りelementの位置設定*/{
+    position        : relative;
+    top             : 50px;
+    left            : 20px;
+}
+.main-value-window__deadline--editable{
+    display         : inline-block;
+
+    width           : 60px;
+    height          : 50px;
+    text-align      : center;
+
+    background-color: rgb(255, 255, 255);
+    border-top      : 3px ridge #b1b1b1; /* 青色の枠線 */
+    border-left     : 3px ridge #b1b1b1; /* 青色の枠線 */
+    border-right    : 3px ridge #b1b1b1; /* 青色の枠線 */
+    border-bottom   : 3px ridge #b1b1b1;
+    box-shadow      : 2px 2px 5px rgba(0, 0, 0, 0.2); /* 影を追加 */
+    border-radius   : 5px; /* 角を丸くする */
+}
+#deadlineYear{
+    width           : 90px;
+}
+
+.main-value-window__fixed-content-span{/*メインウィンドウ：内容spanの位置設定*/
+    position        : relative;
+    top             : 130px;
+    left            : 20px;
+}
+.main-value-window__fixed-content-span--down{/*add-task.html：内容spanの位置　ちょい下*/
+    top             : 155px;
+}
+
+.main-value-window__editable-content{/*メインウィンドウ：内容div-inputの位置設定*/
+    position        : relative;
+    top             : 35px;
+    left            : 240px;
+
+    width           : calc(var(--main-window-width)*0.7);
+    height          : 150px;
+    overflow-y      : scroll ;
+
+    background-color: rgb(255, 255, 255);
+
+    border-top      : 5px ridge #b1b1b1; /* 青色の枠線 */
+    border-left     : 5px ridge #b1b1b1; /* 青色の枠線 */
+    border-right    : 5px ridge #b1b1b1; /* 青色の枠線 */
+    border-bottom   : 5px ridge #b1b1b1;
+    box-shadow      : 2px 2px 5px rgba(0, 0, 0, 0.2); /* 影を追加 */
+    border-radius   : 5px; /* 角を丸くする */
+}
+.main-value-window__editable-content--down{/*add-task.html：内容div-inputの位置設定　チョイした*/
+    top             : 60px;
+    
+}
+
+
+.main-value-window__fixed-password-span,
+.main-value-window__editable-password{/*メインウィンドウ：件名elementの位置設定*/
+    position        : relative;
+    top             : 80px;
+    left            : 20px;
+
+}
+.main-value-window__editable-password--up,
+.main-value-window__fixed-password-span--up{
+    top             : 60px;
+}
+
+#addKey2{
+    display         : none;
+}
+
+.main-value-window__for-margin{
+    visibility      : hidden;
+    padding         : 40px;
+}
+/*=================================================================================*/
+/*===[index.htmlのタスク編集（コマンド）ウィンドウ部分]==============================================================================*/
+
+
+.task-edit-window{/*index.html; taskコマンドウィンドウ*/
+    position        : absolute;
+    top             : 15px;
+    left            : 20px;
+
+    width           : 75%;
+    height          : calc(var(--task-window-height)*0.9);
+
+    background-color: rgba(255, 250, 250, 0.952);
+
+    border-top      : 5px ridge #b1b1b1; /* 青色の枠線 */
+    border-left     : 5px ridge #b1b1b1; /* 青色の枠線 */
+    border-right    : 5px ridge #b1b1b1; /* 青色の枠線 */
+    border-bottom   : 5px ridge #b1b1b1;
+    box-shadow      : 2px 2px 5px rgba(0, 0, 0, 0.2); /* 影を追加 */
+    border-radius   : 5px; /* 角を丸くする */
+
+    display         : none;
+}
+
+.task-edit-window__repeat{/*index.html; taskコマンドウィンドウ 「繰り返し値」のスタイル*/
+    display         : block;
+
+    position        : relative;
+    top             : 15%;
+    left            : 0px;
+
+    width           : 100%;
+    text-align      : center;
+}
+
+.task-edit-window__btn-finish,
+.task-edit-window__btn-edit{/*index.html; taskコマンドウィンドウ　ボタンスタイル設定*/
+    position        : absolute;
+    top             : 140px;
+
+    width           : 200px;
+    height          : auto;
+}
+
+.task-edit-window__btn-finish{/*index.html; taskコマンドウィンドウ　ボタン横位置調整*/
+    left            : 15%;
+}
+.task-edit-window__btn-edit{
+    right            : 15%;
+}
+@media (min-width : 1200px){
+    .task-edit-window__btn-finish{
+        left        : 25%;
+    }
+    .task-edit-window__btn-edit{
+        right       : 25%;
+    }
+}
+@media (min-width : 1300px){
+    .task-edit-window__btn-finish{
+        left        : 23%;
+    }
+    .task-edit-window__btn-edit{
+        right       : 23%;
+    }
+}
+@media (min-width : 1500px){
+    .task-edit-window__btn-finish{
+        left        : 30%;
+    }
+    .task-edit-window__btn-edit{
+        right       : 30%;
+    }
+}
+
+/*=================================================================================*/
+/*====[add-task.htmlのスタイル]=============================================================================*/
+
+.main-value-window__key1,
+.main-value-window__key2{
+    visibility      : hidden;
+    position        : absolute;
+    left            : 170px;
+    height          : 50px;
+}
+.main-value-window__key1{
+    top             : 20px;
+}
+.main-value-window__key2{
+    top             : 325px;
+}
+.main-value-window__key2--up{
+    top             : 235px;
+}
+
+.main-value-window__repeat,
+.main-value-window__combobox{/*add-task　登録メインウィンドウ：繰り返しelement の位置設定*/
+    position        : relative;
+    top             : 80px;
+    left            : 20px;
+}
+.main-value-window__combobox{/*add-task　登録メインウィンドウ：繰り返しcomboboxの位置をちょい左*/
+    position        : relative;
+    left            : 25px;
+    width           : 240px;
+    /*100=time unit*/
+    /*no-repeat : 240px*/
+}
+.main-value-window__repeat-value{
+    display         : none;
+
+    position        : relative;
+    top             : 80px;
+    left            : 25px;
+
+    width           : 70px;
+
+    text-align      : center;
+
+    background-color: rgb(255, 255, 255);
+
+    border-top      : 2px ridge #b1b1b1; /* 青色の枠線 */
+    border-left     : 2px ridge #b1b1b1; /* 青色の枠線 */
+    border-right    : 2px ridge #b1b1b1; /* 青色の枠線 */
+    border-bottom   : 2px ridge #b1b1b1;
+    box-shadow      : 2px 2px 5px rgba(0, 0, 0, 0.2); /* 影を追加 */
+    border-radius   : 5px; /* 角を丸くする */
+}
+
+
+.main-command-window{/*add-task　登録ボタン置くウィンドウ*/
+    display         : inline;
+    position        : absolute;
+    top             : 0px;
+    left            : 80.5%;
+
+    margin          : 0px 0px 0px;
+    width           : 20%;
+    height          : calc(var(--task-window-height)*1.32);
+
+    overflow-x      : hidden;
+    overflow-y      : hidden;
+
+    background-color:  rgb(107, 142, 35);
+    border-right    : 5px solid #b1b1b1; /* 青色の枠線 */
+    border-left     : 5px solid #b1b1b1; /* 青色の枠線 */
+    box-shadow      : 2px 2px 5px rgba(0, 0, 0, 0.2); /* 影を追加 */
+    border-radius   : 5px; /* 角を丸くする */
+}
+.main-command-window__btn-make{/*「課題の追加」ボタンスタイル設定*/
+    position        : relative;
+    left            : 10px;
+    top             : calc(var(--task-window-height)/2);
+    font-size       : 30px;
+}
+
+.alert-window{/*alert設定ウィンドウ*/
+    position        : relative;
+    top             : 7px;
+
+    margin          : 0px 1px 0px;
+    width           : 99%;
+    height          : var(--task-window-height);
+
+
+}
+
+.alert-main-window{/*alert設定ウィンドウ：　メインウィンドウ*/
+    margin          : 0px 1px 0px;
+    width           : 80%;
+    height          : var(--task-window-height);
+    overflow-y      : scroll;
+
+    background-color: rgb(255, 255, 255);
+    border-right    : 5px solid #b1b1b1; /* 青色の枠線 */
+    border-left     : 5px solid #b1b1b1; /* 青色の枠線 */
+    box-shadow      : 2px 2px 5px rgba(0, 0, 0, 0.2); /* 影を追加 */
+    border-radius   : 5px; /* 角を丸くする */
+}
+.alert-command-window{/*alert設定ウィンドウ：　ボタン置くウィンドウ*/
+    position        : absolute;
+    top             : 0px;
+    left            : 80.5%;
+
+    margin          : 0px 1px 0px;
+    width           : 20.5%;
+    height          : var(--task-window-height);
+    overflow-y      : hidden;
+    overflow-x      : hidden;
+
+    background-color: rgb(255, 255, 255);
+    box-shadow      : 2px 2px 5px rgba(0, 0, 0, 0.2); /* 影を追加 */
+    border-radius   : 5px; /* 角を丸くする */
+}
+
+/*
+alert-unit▶
+            __title
+            __input-term
+            __time-combobox
+            __span-before
+            __color-combobox
+            __color-pallet  
+            __span-color   
+            __jp-img
+            __pallet
+            __btn-flash  
+*/
+
+
+.alert-unit{/*alert設定ウィンドウ：　メインウィンドウ内、１つのalertユニット　スタイル*/
+    position        : relative;
+    width           : 1300px;
+    height          : 360px;
+
+    overflow-y      : hidden;
+    overflow-x      : hidden;
+    
+    outline         : 2px inset #000000;
+    outline-offset  : 0px;
+
+}
+
+.alert-unit__title,
+.alert-unit__time-combobox,
+.alert-unit__span-before,
+.alert-unit__color-combobox,
+.alert-unit__color-and,
+.alert-unit__span-pallet{/*alertユニットの文字サイズ設定*/
+    font-size       : 35px;
+}
+.alert-unit__span-before,
+.alert-unit__time-combobox,
+.alert-unit__color-combobox{/*alertユニット内、　期間・色　表示文字elementの位置設定*/
+    top             : 10px;
+}
+
+
+.alert-unit__title{/*alertユニット内、　タイトル[Alert(N)]の位置設定*/
+    position        : relative;
+    top             : 10px;
+    left            : 20px;
+}
+
+.alert-unit__input-term{/*期間を入力するentry*/
+    position        : relative;
+    left            : 50px;
+
+    top             : 13px;    
+    width           : 50px;
+
+    background-color: rgb(255, 255, 255);
+    font-size       : 40px;
+    text-align      : center;
+}
+
+.alert-unit__span-before,
+.alert-unit__time-combobox{/*期間のコンボボックスと「前」を表示するspanの設定*/
+    position        : relative;
+    left            : 60px;
+}
+
+.alert-unit__color-combobox{/*和色のコンボボックス*/
+    position        : relative;
+    left            : 65px;
+    width           : 230px;
+
+    visibility      : visible;
+    z-index         : 99;
+}
+.alert-unit__color-pallet{/*カラーパレット（input type=color）*/
+    position        : absolute;
+    top             : 105px;
+    left            : 375px;
+
+    width           : 230px;
+    height          : 50px;
+}
+
+
+.alert-unit__jp-img{
+    position        : relative ;
+    top             : 30px;
+    left            : 100px;
+    width           : 60px;
+
+}
+.alert-unit__pallet{
+    position        : relative ;
+    top             : 100px;
+    left            : 36px;
+    width           : 60px;
+}/*シグニファイヤーです。和色コンボボックスとカラーパレットの印*/
+
+
+
+.alert-unit__btn-flash{/*alertユニット内、　点滅ボタンのスタイル設定*/
+    position        : absolute;
+    top             : 105px;
+    left            : 710px;
+
+    background-color: rgb(255, 255, 255);
+    color           : rgb(0, 0, 0);
+
+    border-top      : 5px inset #ffffff; /* 青色の枠線 */
+    border-left     : 5px inset #ffffff; /* 青色の枠線 */
+    border-right    : 5px inset #ececec; /* 青色の枠線 */
+    border-bottom   : 5px inset #dfdddd;
+
+    font-size       : 20px;
+}
+
+.alert-unit__color-sample{/*alertユニット内、　色見本のスタイル設定*/
+    position        : relative;
+    top             : 15px;
+    left            : 10px;
+
+    width           : 110px;
+
+    border-top      : 2px inset #ffffff; /* 青色の枠線 */
+    border-left     : 2px inset #ffffff; /* 青色の枠線 */
+    border-right    : 2px inset #a0a0a0; /* 青色の枠線 */
+    border-bottom   : 2px inset #1a1919;
+
+    text-align      : center;
+    font-size       : 25px;
+}
+
+.alert-unit__color-combobox-upbtn,
+.alert-unit__color-combobox-downbtn{
+    position        : absolute;
+    left            : 610px;
+
+    background-color: rgb(255, 255, 255);
+    font-size       : 20px;
+}
+.alert-unit__color-combobox-upbtn{
+    top             : 30px;
+}
+.alert-unit__color-combobox-downbtn{
+    top             : 60px;
+}
+
+.alert-unit__color-combobox--flash,
+.alert-unit__color-pallet--flash,
+.alert-unit__jp-img--flash,
+.alert-unit__pallet--flash{
+    margin          : 60px 0px 0px;
+}
+
+.alert-unit__color-combobox--flash,
+.alert-unit__color-pallet--flash,
+.alert-unit__jp-img--flash,
+.alert-unit__pallet--flash,
+.alert-unit__color-and,
+.alert-unit__color-combobox-upbtn--flash,
+.alert-unit__color-combobox-downbtn--flash{
+    visibility      : hidden;
+}
+
+.alert-unit__color-and{
+    position        : relative;
+    top             : 45px;
+    left            : 560px;
+    display         : block;
+}
+
+
+
+.alert-unit__color-combobox--flash{
+    position        : absolute;
+    top             : 160px;
+    left            : 375px;
+
+    height          : 45px;
+
+}
+.alert-unit__jp-img--flash{
+    top             : -15px;
+    left            : 630px;
+}
+.alert-unit__pallet--flash{
+    top             : 55px;
+    left            : 565px;
+}
+.alert-unit__color-pallet--flash{
+    top             : 236px;
+}
+
+.alert-unit__color-combobox-upbtn--flash{
+    top             : 215px;
+}
+.alert-unit__color-combobox-downbtn--flash{
+    top             : 245px;
+}
+
+/*=====================コマンドウィンドウ===============================================*/
+.alert-command-window__basic,
+.alert-command-window__add,
+.alert-command-window__up,
+.alert-command-window__down,
+.alert-command-window__delete{/*alertボタン置くウィンドウ、　すべてのボタンスタイル設定*/
+    position        : relative;
+    left            : 10px;
+
+    width           : 170px;
+
+    font-size       : 30px;
+}
+
+.alert-command-window__basic{/*alertボタン置くウィンドウ　以下は各種ボタンの位置設定*/
+    top             : 15px;
+}
+.alert-command-window__basic--down{
+    top             : 10px;
+}
+#btnUserColor{
+    /*<todo : ユーザーのmy colorセットを登録できるようにせよ>*/
+    visibility      : hidden;
+}
+
+.alert-command-window__add{
+    top             : 40px;
+}
+.alert-command-window__up{
+    top             : 70px;
+}
+.alert-command-window__down{
+    top             : 75px;  
+}
+.alert-command-window__delete{/* -------------------ここまで------------------------*/
+    top             : 100px;
+}
+
+/*--------------------------------------------------------------------------------*/
+
+
+
+
+/*=================================================================================*/
+/*=================================================================================*/
+
+.setting-info{
+    display: none;
+
+    text-indent: 20px ;
+    font-size: 25px;
+    padding-top: 10px;
+
+    width: 95%;
+    height: 50px;
+    margin:  0px 1vw 10px;
+    background-color: #ffffff;
+    border-top: 3px solid #b1b1b1; /* 青色の枠線 */
+    border-left : 10px solid #0014c4; /* 青色の枠線 */
+    border-right : 3px solid #b1b1b1; /* 青色の枠線 */
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2); /* 影を追加 */
+    border-radius: 5px; /* 角を丸くする */
+}
+
+
+.setting{
+    background-color: rgb(255, 255, 255);
+    margin:  0px 2vw 0px;
+    width: 95%;
+    height: 100%;
+}
+.setting-title{
+    width: 100%;
+
+    background-color: #ffffff;
+    border-top: 3px solid #b1b1b1; /* 青色の枠線 */
+    border-left : 3px solid #b1b1b1; /* 青色の枠線 */
+    border-right : 3px solid #b1b1b1; /* 青色の枠線 */
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2); /* 影を追加 */
+    border-radius: 5px; /* 角を丸くする */
+}
+.setting-title__title{
+    margin: 0px 5vw 0px;
+    font-size: 30px;
+}
+.setting-cell{ /*これは保存*/
+    position: relative;
+
+    width: 100%;
+    height: 20vh;
+
+
+    background-color: #ffffff;
+    border-top : 3px solid #b1b1b1; /* 青色の枠線 */
+    border-left : 3px solid #b1b1b1; /* 青色の枠線 */
+    border-right : 3px solid #b1b1b1; /* 青色の枠線 */
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2); /* 影を追加 */
+    border-radius: 5px; /* 角を丸くする */
+
+}
+.setting-cell__label{/*これは保存*/
+    margin: 0px 10px 0px;
+    font-size: 20px;
+    
+    position: absolute;
+    top: 30%;
+}
+.setting-cell__btn-enter{/*これは保存*/
+    margin: 0px 10px 0px;
+    
+    width: 340px;
+
+    font-size: 20px;
+    background-color: rgb(0, 122, 90);
+    color: #ffffff;
+    font-weight: bold;
+
+    position: absolute;
+    bottom: 10px;
+    border-radius: 5px; /* 角を丸くする */
+}
+
+
+
+
+.setting-search-date__combo{
+    font-size: 20px;
+
+    position: absolute;
+    top: 30%;
+    left: 200px;
+}
+.setting-search-date__custom{
+    display: none;
+
+    font-size: 20px;
+
+    position: absolute;
+    top: 30%;
+    left: 400px
+
+}
+
+
+
+.setting__hashtags{
+    position: relative;
+
+    width: 100%;
+    height: 400px;
+
+
+    background-color: #ffffff;
+    border-top : 3px solid #b1b1b1; /* 青色の枠線 */
+    border-left : 3px solid #b1b1b1; /* 青色の枠線 */
+    border-right : 3px solid #b1b1b1; /* 青色の枠線 */
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2); /* 影を追加 */
+    border-radius: 5px; /* 角を丸くする */
+
+}
+
+.setting-table{
+    position: absolute;
+    margin: 20px 30px 50px;
+    left: 200px;
+    width: 50%;
+
+    background-color: rgb(251, 198, 255);
+    
+}
+.setting-column-cell{
+    border : 3px solid #b1b1b1;
+    background-color: rgb(242, 176, 247);
+    
+}
+.setting-row-cell{
+    border : 3px solid #b1b1b1;
+    
+}
+
+.setting-info{
+    display: none;
+    
+    text-indent: 20px ;
+    font-size: 25px;
+    padding-top: 10px;
+    
+    width: 95%;
+    height: 50px;
+    margin:  0px 2vw 10px;
+    background-color: #ffffff;
+    border-top: 3px solid #b1b1b1; /* 青色の枠線 */
+    border-left : 10px solid #0014c4; /* 青色の枠線 */
+    border-right : 3px solid #b1b1b1; /* 青色の枠線 */
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2); /* 影を追加 */
+    border-radius: 5px; /* 角を丸くする */
+}
+
+.setting-column-cell__hashtag{
+    border-right : 3px solid #b1b1b1; /* 青色の枠線 */
+    width: 50px;
+}
+.setting-row-cell__title{
+    border-right : 3px solid #b1b1b1; /* 青色の枠線 */
+    background-color: rgb(246, 207, 250);
+}
+.setting-row-cell__data{
+    background-color: #fde3ff;
+}
