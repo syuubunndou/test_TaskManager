@@ -3608,7 +3608,7 @@ class TaskManager {
             const PAGE_TITLE = this.UrlFunc.extractHtmlTitle(URL);
             if (PAGE_TITLE) {
                 this.setHeaderEvents(PAGE_TITLE);
-                if (PAGE_TITLE === "index" || PAGE_TITLE === "TaskManager") {
+                if (PAGE_TITLE === "index" || PAGE_TITLE === "TaskManager" || PAGE_TITLE === "test_TaskManager") {
                     yield this.renderTaskWindows();
                 }
                 else if (PAGE_TITLE === "add-task" || PAGE_TITLE === "edit-task") {
@@ -3678,7 +3678,7 @@ class TaskManager {
         }
     }
     setHeaderEvents(PAGE_TITLE) {
-        if (PAGE_TITLE === "index" || PAGE_TITLE === "TaskManager") {
+        if (PAGE_TITLE === "index" || PAGE_TITLE === "TaskManager" || PAGE_TITLE === "test_TaskManager") {
             const ADD_BTN = document.getElementById("headerAddBtn");
             ADD_BTN.addEventListener("click", () => {
                 this.UrlFunc.redirect({
@@ -3697,7 +3697,7 @@ class TaskManager {
                 });
             });
         }
-        if (PAGE_TITLE === "index" || PAGE_TITLE === "TaskManager" || PAGE_TITLE === "add-task") {
+        if (PAGE_TITLE === "index" || PAGE_TITLE === "TaskManager" || PAGE_TITLE === "test_TaskManager" || PAGE_TITLE === "add-task") {
             this.__setMenuEvents();
             const LABO_LOGO = document.getElementById("headerLaboLogo");
             LABO_LOGO.addEventListener("click", () => {
