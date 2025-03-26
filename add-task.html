@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+
+<html lang="ja">
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="style.css">
+        <title>Task Manager</title>
+    </head>
+
+    <body>
+        <header class="header">
+            <img  class="header__logo"                            src="header.png">
+            <img  class="header__labo-logo" id="headerLaboLogo"   src="labo-logo.png">
+            <img  class="header__add-btn"   id="headerHomeBtn"     src="home.png">
+            <img  class="header__btn"       id="headerSettingBtn" src="btn.png" >
+            <span class="header__user-name" id="headerUserName"></span>
+            <div  class="menu"              id="menu">
+
+                <button type="button"  class="menu__btn" id="menuBtnLogin">ログイン</button> 
+                <button type="button"  class="menu__btn" id="menuBtnSetting">設定</button> 
+            </div>
+            
+        </header>
+        <div class="setting-info" id="setting-info">✅タスクを登録しました</div>
+
+        <div  class="add-window">
+            <div class="main-window"                       >
+                <div class="main-value-window main-value-window--add-task"                              id="addWindow">
+                    <img    class="main-value-window__key1"                                             id="key1"           src="key.png"          >
+                    <span   class="main-value-window__fixed-title-span"                                 id="expTitle"                              >件名　　　：</span> 
+                    <span   class="main-value-window__editable-title"                                   id="addTitle"       contenteditable="true" >課題名     </span>
+                    <br>
+                    <span   class="main-value-window__fixed-deadlline-span"                                                                        >締め切り　：</span>
+                    <span   class="main-value-window__deadline main-value-window__deadline--editable"   id="deadlineYear"  contenteditable="true" >           </span>
+                    <span   class="main-value-window__deadline"                                                                                    >年         </span>
+                    <span   class="main-value-window__deadline main-value-window__deadline--editable"   id="deadlineMonth"  contenteditable="true" >           </span>
+                    <span   class="main-value-window__deadline"                                                                                    >月         </span>
+                    <span   class="main-value-window__deadline main-value-window__deadline--editable"   id="deadlineDay"    contenteditable="true" >           </span>
+                    <span   class="main-value-window__deadline"                                                                                    >日         </span>
+                    <span   class="main-value-window__deadline"                                         id="deadlineWeekday"                       >()         </span>
+                    <span   class="main-value-window__deadline main-value-window__deadline--editable"   id="deadlineHour"   contenteditable="true" >           </span>
+                    <span   class="main-value-window__deadline"                                                                                    >時         </span>           
+                    <span   class="main-value-window__deadline main-value-window__deadline--editable"   id="deadlineMinute" contenteditable="true" >           </span>   
+                    <span   class="main-value-window__deadline"                                                                                    >分         </span>   
+    
+                    <br>
+                    <span   class="main-value-window__repeat"                                                                                      >繰り返し　：</span>
+                    <span   class="main-value-window__repeat-value"                                     id="repeatValue"    contenteditable="true"></span>
+                    <select class="main-value-window__combobox"                                         id="addCombobox"                           >
+                        <option value="no-repeat">繰り返さない</option>
+                        <option value="minute"   >分毎      </option>
+                        <option value="hour"    >時毎      </option>
+                        <option value="day"     >日毎      </option>
+                        <option value="week"    >週毎      </option>
+                        <option value="month"   >月毎      </option>
+                        <option value="year"    >年毎      </option>
+                    </select>
+                    <br>
+                    <span   class="main-value-window__fixed-content-span main-value-window__fixed-content-span--down"                             >内容　　　：</span>
+                    <div    class="main-value-window__editable-content main-value-window__editable-content--down"     id="addContent"  contenteditable="true">
+                    </div>
+                    <img    class="main-value-window__key2"                                             id="key2"           src="key.png"         >
+                    <span   class="main-value-window__fixed-password-span"                                                                        >パスワード：</span>
+                    <span   class="main-value-window__editable-password"                                id="addKey1"       contenteditable="true"  >           </span>
+                    <br>
+                    <span   class="main-value-window__fixed-password-span"                                                                        >　　　　　　</span>
+                    <span   class="main-value-window__editable-password"                                id="addKey2"       contenteditable="true"  >           </span>
+                    <div    class="main-value-window__for-margin">margin</div>
+                </div>
+    
+                <div class="main-command-window">
+                    <button class="main-command-window__btn-make"  id="btnMake">課題の追加</button>
+                </div>
+            </div>
+
+            <div class="alert-window"  id="alertWindow"    >
+
+                <div class="alert-main-window"  id="alertMainWindow">
+
+                    
+                </div>
+
+                <div class="alert-command-window">
+                    <button class="alert-command-window__basic alert-command-window__basic--down"  id="btnBasic"  >基本色</button>
+                    <button class="alert-command-window__basic"  id="btnUserColor"  >登録色</button>
+                    <button class="alert-command-window__add"    id="btnAdd"   >追加  </button>
+                    <button class="alert-command-window__up"     id="btnUp"    >↑     </button>
+                    <button class="alert-command-window__down"   id="btnDown"  >↓     </button>
+                    <button class="alert-command-window__delete" id="btnDelete">削除  </button>
+                </div>
+            </div>
+
+
+        </div>
+        
+                
+        <script type = "module" src="TaskManager.js"></script>
+    </body>
+
+</html>
+
+
+<!--
+#春から東北福祉大学
+#春から東北福祉大
+#春からTFU
+#春からtfu
+
+-->

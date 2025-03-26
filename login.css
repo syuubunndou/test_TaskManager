@@ -1,0 +1,93 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
+.header {
+    position: relative;  /* 相対位置を基準 */
+    width: 100%;
+    height: auto;
+    margin: 0px 0px 30px;
+
+  }
+
+.header__logo {
+
+    width: 100%; /* 横幅いっぱいに */
+    height: auto; /* 縦幅は自動調整 */
+    display: block; /* 余計な隙間をなくす */
+}
+
+.header__btn {
+    position: absolute;  /* 親要素 .header を基準に配置 */
+    right: 0;  /* 左端に配置 */
+    bottom: 0;  /* 下端に配置 */
+    width: 100px; /* ボタンサイズ（調整可） */
+    height: auto;
+
+    margin: 0px 50px 0px;
+}
+
+
+/* ログインコンテナ */
+.login-container {
+    margin: 0px 20vw 0px;
+
+    background-color: white;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 500px; /* 最大幅を設定してレスポンシブ対応 */
+}
+@media screen and (min-width: 1024px) {
+    /* PC向けのスタイル */
+    .login-container {
+        margin: 0px 35% 0px;
+    }
+}
+
+
+/* タイトル */
+h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* 入力グループ */
+.input-group {
+    margin-bottom: 15px;
+}
+
+/* ラベル */
+.input-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 14px;
+}
+
+/* 入力フィールド */
+.input-group input {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+/* ログインボタン */
+.login-btn {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+.login-btn:hover {
+    background-color: #0056b3;
+}

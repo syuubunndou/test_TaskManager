@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+
+<html lang="ja">
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="style.css">
+        <title>Task Manager</title>
+    </head>
+
+    <body>
+        <header class="header">
+            <img  class="header__logo"                            src="header.png">
+            <img  class="header__labo-logo" id="headerLaboLogo"   src="labo-logo.png">
+            <img  class="header__add-btn"   id="headerAddBtn"     src="add_task.png">
+            <img  class="header__btn"       id="headerSettingBtn" src="btn.png" >
+            <span class="header__user-name" id="headerUserName"></span>
+            <div  class="menu"              id="menu">
+
+                <button type="button"  class="menu__btn" id="menuBtnLogin">ログイン</button> 
+                <button type="button"  class="menu__btn" id="menuBtnSetting">設定</button> 
+            </div>
+            
+        </header>     
+                
+        <div class="promptLogin" id="promptLogin">
+            課題を追加・編集・確認するには
+            <br>
+            歯車マークをタッチし、<img class="promptLogin__haguruma"  id = "haguruma" src="btn.png">
+            <br>
+            ログインボタンを押してください。<img class="promptLogin__login-exp" src="login_btn_exp.png">
+        </div>
+
+
+        <script async defer src="https://apis.google.com/js/api.js"></script>
+        <script async defer src="https://accounts.google.com/gsi/client"></script>
+    
+          
+        <script type="module" src="TaskManager.js"></script>
+    </body>
+
+</html>
+
+
+
+
+

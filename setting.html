@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+
+<html lang="ja">
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="style.css">
+        <title>Task Manager</title>
+    </head>
+
+    <body>
+        <header class="header">
+            <img  class="header__logo"                            src="header.png">
+            <img  class="header__labo-logo" id="headerLaboLogo"   src="labo-logo.png">
+            <img  class="header__add-btn"   id="headerHomeBtn"     src="home.png">
+            <img  class="header__btn"       id="headerSettingBtn" src="btn.png" >
+            <span class="header__user-name" id="headerUserName"></span>
+            <div  class="menu"              id="menu">
+
+                <button type="button"  class="menu__btn" id="menuBtnLogin">ログイン</button> 
+                <button type="button"  class="menu__btn" id="menuBtnSetting">設定</button> 
+            </div>
+            
+        </header>
+        
+        <div class="setting-info" id="setting-info">✅設定を更新しました</div>
+
+        <div class="setting" id="setting">
+            <div class="setting-title">
+                <span class="setting-title__title">設定</span>
+            </div>
+            <div class="setting-cell">
+                <div class="setting-search-date">
+
+                    <label  class="setting-cell__label" >セキュリティ:</label>
+                    <select class="setting-cell__combo" id="settingSecurityCombo">
+                        <option value=""></option>
+                    </select>
+
+                    <button class="setting-cell__btn-enter" id="btnSearchDate">検索する日程範囲を更新する</button>
+                </div>
+            </div>
+                
+
+        </div>
+
+        <script type = "module" src="TaskManager.js"></script>
+    </body>
+
+</html>
+
+
+<!--
+#春から東北福祉大学
+#春から東北福祉大
+#春からTFU
+#春からtfu
+
+-->
+
