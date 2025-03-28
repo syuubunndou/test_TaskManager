@@ -635,7 +635,7 @@ alert-unit▶
     width           : 230px;
 
     visibility      : visible;
-    z-index         : 99;
+    z-index         : 5;
 }
 .alert-unit__color-pallet{/*カラーパレット（input type=color）*/
     position        : absolute;
