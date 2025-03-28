@@ -648,13 +648,9 @@ class UrlFunction {
         _UrlFunction_instances.add(this);
     }
     extractHtmlTitle(rawHtml, CALL_FROM) {
-        alert(`original url : ${rawHtml}`);
         const url = new URL(rawHtml);
-        alert(`done URL() func : ${url}`);
         let htmlLink = url.pathname;
-        alert(`extract url without query part. : ${htmlLink}`);
         htmlLink = htmlLink.replace(/\/$/, "");
-        alert(`replace /  => ${htmlLink}`);
         var configured_item = htmlLink.split("/").pop();
         if (configured_item) {
             const MATCHED_ITEMS = configured_item.match(/^(.+)(?:\.github\.io|\.html)?\/?$/);
@@ -745,25 +741,19 @@ _UrlFunction_instances = new WeakSet(), _UrlFunction___composeURLbyPageTitle = f
         const MATCHED_ITEMS = URL.match(/https:\/{2}syuubunndou.github.io\/[/w/.]*/);
         if (MATCHED_ITEMS) {
             const FUNDATIONAL_URL = MATCHED_ITEMS[0];
-            const FUNDATIONAL_PAGE_NAME = this.extractHtmlTitle(FUNDATIONAL_URL, CALL_FROM);
-            if (FUNDATIONAL_PAGE_NAME == PAGE_TITLE) {
-                alert(`ホームページ名とPAGE_TITLEは違う名前でなければなりません。\n〇　https://syuubunndou.github.io/ホームページ名.github.io/サブページ名.html\ncall from${CALL_FROM}`);
-            }
-            else {
-                if (URL.match(/\.html$/)) {
-                    const IS_MATCH = URL.match(PAGE_TITLE_REG_WITH_SYNBOLE) ? true : false;
-                    if (IS_MATCH) {
-                        var composedURL = URL.replace(PAGE_TITLE_REG_WITH_SYNBOLE, `/${PAGE_TITLE}.html`);
-                        return composedURL;
-                    }
-                    else {
-                        alert(`ファイル名エラーです。htmlファイル名にひらがなや漢字が含まれていませんか？ url : ${URL} \ncall from${CALL_FROM}`);
-                    }
-                }
-                else {
-                    var composedURL = `${URL}${PAGE_TITLE}.html`;
+            if (URL.match(/\.html$/)) {
+                const IS_MATCH = URL.match(PAGE_TITLE_REG_WITH_SYNBOLE) ? true : false;
+                if (IS_MATCH) {
+                    var composedURL = URL.replace(PAGE_TITLE_REG_WITH_SYNBOLE, `/${PAGE_TITLE}.html`);
                     return composedURL;
                 }
+                else {
+                    alert(`ファイル名エラーです。htmlファイル名にひらがなや漢字が含まれていませんか？ url : ${URL} \ncall from${CALL_FROM}`);
+                }
+            }
+            else {
+                var composedURL = `${URL}${PAGE_TITLE}.html`;
+                return composedURL;
             }
         }
         else {
