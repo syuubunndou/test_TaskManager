@@ -648,9 +648,13 @@ class UrlFunction {
         _UrlFunction_instances.add(this);
     }
     extractHtmlTitle(rawHtml, CALL_FROM) {
+        alert(`original url : ${rawHtml}`);
         const url = new URL(rawHtml);
+        alert(`done URL() func : ${url}`);
         let htmlLink = url.pathname;
+        alert(`extract url without query part. : ${htmlLink}`);
         htmlLink = htmlLink.replace(/\/$/, "");
+        alert(`replace /  => ${htmlLink}`);
         var configured_item = htmlLink.split("/").pop();
         if (configured_item) {
             const MATCHED_ITEMS = configured_item.match(/^(.+)(?:\.github\.io|\.html)?\/?$/);
