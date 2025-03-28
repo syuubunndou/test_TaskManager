@@ -647,7 +647,7 @@ class UrlFunction {
     constructor() {
         _UrlFunction_instances.add(this);
     }
-    extractHtmlTitle(rawHtml) {
+    extractHtmlTitle(rawHtml, CALL_FROM) {
         const url = new URL(rawHtml);
         let htmlLink = url.pathname;
         htmlLink = htmlLink.replace(/\/$/, "");
@@ -661,11 +661,11 @@ class UrlFunction {
                 return htmlTitle;
             }
             else {
-                alert(`Error: Utils.js, UrlFunction, extractHtmlTitle, 正規表現に一致しませんでした。htmlLink is ${htmlLink}, Reg is ^(.+)(?:\.github\.io|\.html)?\/?$`);
+                alert(`Error: Utils.js, UrlFunction, extractHtmlTitle, 正規表現に一致しませんでした。htmlLink is ${htmlLink}, Reg is ^(.+)(?:\.github\.io|\.html)?\/?$\ncall from ${CALL_FROM}`);
             }
         }
         else {
-            alert(`Error: Utils.js, UrlFunction, extractHtmlTitle, configured_item is undefined. htmlLink is ${htmlLink}`);
+            alert(`Error: Utils.js, UrlFunction, extractHtmlTitle, configured_item is undefined. htmlLink is ${htmlLink}\ncall from ${CALL_FROM}`);
         }
     }
     __deleteQueryPart(URL) {
@@ -680,7 +680,7 @@ class UrlFunction {
     redirect(REDIRECT_DATA) {
         if (REDIRECT_DATA.METHOD === "toSelectedPage") {
             if (REDIRECT_DATA.PAGE_TITLE) {
-                var url = __classPrivateFieldGet(this, _UrlFunction_instances, "m", _UrlFunction___composeURLbyPageTitle).call(this, REDIRECT_DATA.PAGE_TITLE);
+                var url = __classPrivateFieldGet(this, _UrlFunction_instances, "m", _UrlFunction___composeURLbyPageTitle).call(this, REDIRECT_DATA.PAGE_TITLE, REDIRECT_DATA.CALL_FROM);
                 if (REDIRECT_DATA.QUERY) {
                     let query = this.__convertDataToQueryString(REDIRECT_DATA.QUERY);
                     url += `?data=${query}`;
@@ -693,11 +693,11 @@ class UrlFunction {
                 }
             }
             else {
-                alert("in UrlFunction, redirect. composeURLbyPageTitleが引数に渡されました。しかし、必要なPAGE_TITLEが引数にありません。指定してください。");
+                alert(`in UrlFunction, redirect. composeURLbyPageTitleが引数に渡されました。しかし、必要なPAGE_TITLEが引数にありません。指定してください。\ncall from${CALL_FROM}`);
             }
         }
         else if (REDIRECT_DATA.METHOD === "toHP") {
-            var url = __classPrivateFieldGet(this, _UrlFunction_instances, "m", _UrlFunction___returnHomePageURL).call(this);
+            var url = __classPrivateFieldGet(this, _UrlFunction_instances, "m", _UrlFunction___returnHomePageURL).call(this, REDIRECT_DATA.CALL_FROM);
             if (REDIRECT_DATA.QUERY) {
                 let query = this.__convertDataToQueryString(REDIRECT_DATA.QUERY);
                 url += `?data=${query}`;
@@ -734,16 +734,16 @@ class UrlFunction {
         console.log(`Error: in UrlFunction, ${METHOD_NAME}, ${INFO}`);
     }
 }
-_UrlFunction_instances = new WeakSet(), _UrlFunction___composeURLbyPageTitle = function _UrlFunction___composeURLbyPageTitle(PAGE_TITLE, URL = window.location.href) {
+_UrlFunction_instances = new WeakSet(), _UrlFunction___composeURLbyPageTitle = function _UrlFunction___composeURLbyPageTitle(PAGE_TITLE, CALL_FROM, URL = window.location.href) {
     const PAGE_TITLE_REG_WITH_SYNBOLE = /\/([a-zA-Z_\-.・\(\)\[\]\{},@]*)\.html$/;
     URL = this.__deleteQueryPart(URL);
     if (URL.match(/github/)) {
         const MATCHED_ITEMS = URL.match(/https:\/{2}syuubunndou.github.io\/[/w/.]*/);
         if (MATCHED_ITEMS) {
             const FUNDATIONAL_URL = MATCHED_ITEMS[0];
-            const FUNDATIONAL_PAGE_NAME = this.extractHtmlTitle(FUNDATIONAL_URL);
+            const FUNDATIONAL_PAGE_NAME = this.extractHtmlTitle(FUNDATIONAL_URL, CALL_FROM);
             if (FUNDATIONAL_PAGE_NAME == PAGE_TITLE) {
-                alert("ホームページ名とPAGE_TITLEは違う名前でなければなりません。\n〇　https://syuubunndou.github.io/ホームページ名.github.io/サブページ名.html");
+                alert(`ホームページ名とPAGE_TITLEは違う名前でなければなりません。\n〇　https://syuubunndou.github.io/ホームページ名.github.io/サブページ名.html\ncall from${CALL_FROM}`);
             }
             else {
                 if (URL.match(/\.html$/)) {
@@ -753,7 +753,7 @@ _UrlFunction_instances = new WeakSet(), _UrlFunction___composeURLbyPageTitle = f
                         return composedURL;
                     }
                     else {
-                        alert(`ファイル名エラーです。htmlファイル名にひらがなや漢字が含まれていませんか？ url : ${URL}`);
+                        alert(`ファイル名エラーです。htmlファイル名にひらがなや漢字が含まれていませんか？ url : ${URL} \ncall from${CALL_FROM}`);
                     }
                 }
                 else {
@@ -763,7 +763,7 @@ _UrlFunction_instances = new WeakSet(), _UrlFunction___composeURLbyPageTitle = f
             }
         }
         else {
-            alert(`Error: Utils.js, UrlFunctions, composedURLbyPageTitle, 正規表現にマッチしたものはありません。URL is ${URL}`);
+            alert(`Error: Utils.js, UrlFunctions, composedURLbyPageTitle, 正規表現にマッチしたものはありません。URL is ${URL} \ncall from${CALL_FROM}`);
             return;
         }
     }
@@ -774,10 +774,10 @@ _UrlFunction_instances = new WeakSet(), _UrlFunction___composeURLbyPageTitle = f
             return composedURL;
         }
         else {
-            alert(`ファイル名エラーです。htmlファイル名にひらがなや漢字が含まれていませんか？ url : ${URL}`);
+            alert(`ファイル名エラーです。htmlファイル名にひらがなや漢字が含まれていませんか？ url : ${URL} \ncall from${CALL_FROM}`);
         }
     }
-}, _UrlFunction___returnHomePageURL = function _UrlFunction___returnHomePageURL(homePageTitle = "index") {
+}, _UrlFunction___returnHomePageURL = function _UrlFunction___returnHomePageURL(CALL_FROM, homePageTitle = "index") {
     const URL = this.__deleteQueryPart(window.location.href);
     if (URL.match(/github/)) {
         const MATCHED_ITEMS = URL.match(/https:\/{2}syuubunndou.github.io\/[\w\.]*\//);
@@ -786,12 +786,12 @@ _UrlFunction_instances = new WeakSet(), _UrlFunction___composeURLbyPageTitle = f
             return gitHomePageURL;
         }
         else {
-            alert(`Error: Utils.js, UrlFunction, returnHomePageURL, 正規表現にマッチしたものはありません。 URL is : ${URL}`);
+            alert(`Error: Utils.js, UrlFunction, returnHomePageURL, 正規表現にマッチしたものはありません。 URL is : ${URL}\ncall from${CALL_FROM}`);
             return;
         }
     }
     else {
-        var localHomePageURL = __classPrivateFieldGet(this, _UrlFunction_instances, "m", _UrlFunction___composeURLbyPageTitle).call(this, homePageTitle, URL);
+        var localHomePageURL = __classPrivateFieldGet(this, _UrlFunction_instances, "m", _UrlFunction___composeURLbyPageTitle).call(this, homePageTitle, URL, CALL_FROM);
         return localHomePageURL;
     }
 };
