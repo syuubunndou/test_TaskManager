@@ -4081,6 +4081,10 @@ class TaskManager {
                 else {
                     alert(`無効なページタイトルです。: Pagetitle = ${PAGE_TITLE}`);
                 }
+                if (PAGE_TITLE === "test_TaskManager") {
+                    const HEADER_LOGO = document.getElementById("header__logo");
+                    HEADER_LOGO.src = "header__for_test_html.png";
+                }
             }
             else {
                 this.UrlFunc.alertError("extractHtmlTitle", `TaskManager内、executeByURLで無効なURLでした。URL:${URL}`);
