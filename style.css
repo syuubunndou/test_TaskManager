@@ -121,7 +121,7 @@ html, body {
 
 .promptLogin{
     position        : relative;
-    top             : 10%;
+    top             : 0%;
     left            : 10%;
 
     width           : 80%;
@@ -147,6 +147,39 @@ html, body {
     position        : relative;
     top             : 5px;
     width           : 120px;   
+}
+
+.place-of-taskwindows{
+    position        : relative;
+    height          : auto;
+}
+
+
+/*=====アプリの説明部 フッター============================================*/
+
+.explain {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+.explain__title {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    word-wrap: break-word;
+}
+.explain__section {
+    margin-bottom: 15px;
+    word-wrap: break-word;
+}
+.explain__contact {
+    font-weight: bold;
+    color: #007bff;
 }
 
 /*=================================================================================*/
@@ -971,4 +1004,18 @@ alert-unit▶
 }
 .setting-row-cell__data{
     background-color: #fde3ff;
+}
+
+
+footer{
+    position        : relative;
+    top             : 150px;
+
+    text-align      : center;
+    font-size       : 40px;
+    width           : 100%;
+
+}
+.footer__a{
+    margin-left     : 100px;
 }
